@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - MyApp</title>
+    <style>
+        /* (Style yang Anda berikan tadi, tidak diubah) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            color: #222;
+        }
+        main.admin-container {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #d45d00;
+            font-weight: 700;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        input[type="text"] {
+            padding: 0.75rem 1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+        input[type="text"]:focus {
+            border-color: #d45d00;
+            outline: none;
+            box-shadow: 0 0 8px rgba(212, 93, 0, 0.5);
+        }
+        button[type="submit"] {
+            background-color: #d45d00;
+            color: #fff;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover,
+        button[type="submit"]:focus {
+            background-color: #b44a00;
+            outline: none;
+        }
+        .message {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4caf50;
+            user-select: none;
+            text-align: center;
+        }
+        h3 {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #d45d00;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a.back-link {
+            margin-top: 1.5rem;
+            display: inline-block;
+            color: #d45d00;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        a.back-link:hover,
+        a.back-link:focus {
+            color: #b44a00;
+            text-decoration: underline;
+            outline: none;
+        }
+        @media (max-width: 400px) {
+            main.admin-container {
+                padding: 1.5rem 1.5rem;
+                border-radius: 10px;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+            button[type="submit"] {
+                font-size: 1rem;
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="admin-container">
+        <h2>Admin Panel - Tambah Redeem Code</h2>
+
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <div>
+                <label for="new_code">Kode Baru:</label>
+                <input type="text" id="new_code" name="new_code" required />
+            </div>
+            <div>
+                <label for="reward">Hadiah:</label>
+                <input type="text" id="reward" name="reward" required />
+            </div>
+            <button type="submit">Tambah Kode</button>
+        </form>
+
+        <h3>Daftar Kode yang Ada</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kode</th>
+                    <th>Hadiah</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for code in codes %}
+                <tr>
+                    <td>{{ code.code }}</td>
+                    <td>{{ code.reward }}</td>
+                    <td>{{ 'Sudah Dipakai' if code.used else 'Belum Dipakai' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="back-link" href="{{ url_for('dashboard') }}">Kembali ke Dashboard</a>
+    </main>
+</body>
+</html>
