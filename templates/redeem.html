@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redeem Code - MyApp</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            color: #222;
+        }
+
+        main.redeem-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.15);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #3b2d6a;
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        input[type="text"] {
+            padding: 0.75rem 1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+
+        input[type="text"]:focus {
+            border-color: #764ba2;
+            outline: none;
+            box-shadow: 0 0 8px rgba(118, 75, 162, 0.5);
+        }
+
+        button[type="submit"] {
+            background-color: #764ba2;
+            color: #fff;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover,
+        button[type="submit"]:focus {
+            background-color: #57336a;
+            outline: none;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5a2a8a;
+            user-select: none;
+            text-align: center;
+        }
+
+        .back-link {
+            margin-top: 1.5rem;
+            display: inline-block;
+            color: #764ba2;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover,
+        .back-link:focus {
+            color: #57336a;
+            text-decoration: underline;
+            outline: none;
+        }
+
+        @media (max-width: 400px) {
+            main.redeem-container {
+                padding: 1.5rem;
+                border-radius: 10px;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            button[type="submit"] {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="redeem-container" role="main" aria-label="Redeem Code form">
+        <h2>Redeem Code</h2>
+        {% if message %}
+            <p class="message" role="alert">{{ message }}</p>
+        {% endif %}
+        <form method="post" novalidate>
+            <label for="code">Masukkan kode</label>
+            <input id="code" type="text" name="code" required aria-required="true" autocomplete="off" placeholder="Masukkan kode Anda" />
+            <button type="submit">Redeem</button>
+        </form>
+        <a href="{{ url_for('dashboard') }}" class="back-link">Kembali ke Dashboard</a>
+    </main>
+</body>
+</html>

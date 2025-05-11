@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - MyApp</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #222;
+            padding: 1rem;
+        }
+
+        main.dashboard-container {
+            background: #fff;
+            padding: 2.5rem 3rem;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.75rem;
+            color: #0f5132;
+            font-weight: 700;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Tengahin tombol */
+            gap: 1.25rem;
+        }
+
+        a.button-link {
+            display: inline-block;
+            background: #38ef7d;
+            color: #065f46;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(56,239,125,0.4);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            min-width: 180px;
+            max-width: 80%;
+        }
+
+        a.button-link:hover,
+        a.button-link:focus {
+            background: #2ecc71;
+            color: #043927;
+            outline: none;
+            box-shadow: 0 8px 24px rgba(46,204,113,0.6);
+        }
+
+        @media (max-width: 400px) {
+            main.dashboard-container {
+                padding: 1.75rem 1.5rem;
+                border-radius: 12px;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 1.25rem;
+            }
+
+            a.button-link {
+                font-size: 1rem;
+                padding: 0.7rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="dashboard-container" role="main" aria-label="Dashboard navigation">
+        <h2>Selamat datang di Dashboard</h2>
+        <ul>
+            <li><a href="{{ url_for('redeem') }}" class="button-link">Redeem Code</a></li>
+            {% if session.get('user_email') == 'admin@admin.com' %}
+            <li><a href="{{ url_for('admin') }}" class="button-link">Panel Admin</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('logout') }}" class="button-link">Logout</a></li>
+        </ul>
+    </main>
+</body>
+</html>
